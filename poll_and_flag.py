@@ -25,8 +25,8 @@ REPLY_TEXT = (
     "pricing supplement / term sheet and take any action needed."
 )
 
-# 40-min lookback covers the 30-min cron interval plus GitHub Actions' schedule drift.
-LOOKBACK_SECONDS = 60 * 40
+# 15-min lookback covers the 10-min cron interval plus GitHub Actions' schedule drift.
+LOOKBACK_SECONDS = 60 * 15
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
