@@ -1,0 +1,24 @@
+name: Poll for forwarded emails
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - run: pip install slack-sdk
+
+      - run: python3 poll_and_flag.py
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          POLL_CHANNEL_IDS: ${{ vars.POLL_CHANNEL_IDS }}
